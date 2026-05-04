@@ -14,16 +14,172 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          department: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          department?: string | null
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          department?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      reservations: {
+        Row: {
+          created_at: string
+          date: string
+          end_time: string
+          id: string
+          notes: string | null
+          priority: Database["public"]["Enums"]["reservation_priority"]
+          start_time: string
+          status: Database["public"]["Enums"]["reservation_status"]
+          user_id: string
+          videobeam_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          end_time: string
+          id?: string
+          notes?: string | null
+          priority?: Database["public"]["Enums"]["reservation_priority"]
+          start_time: string
+          status?: Database["public"]["Enums"]["reservation_status"]
+          user_id: string
+          videobeam_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          end_time?: string
+          id?: string
+          notes?: string | null
+          priority?: Database["public"]["Enums"]["reservation_priority"]
+          start_time?: string
+          status?: Database["public"]["Enums"]["reservation_status"]
+          user_id?: string
+          videobeam_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reservations_videobeam_id_fkey"
+            columns: ["videobeam_id"]
+            isOneToOne: false
+            referencedRelation: "videobeams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      videobeams: {
+        Row: {
+          brand: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          model: string | null
+          name: string
+          status: Database["public"]["Enums"]["videobeam_status"]
+        }
+        Insert: {
+          brand?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          model?: string | null
+          name: string
+          status?: Database["public"]["Enums"]["videobeam_status"]
+        }
+        Update: {
+          brand?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          model?: string | null
+          name?: string
+          status?: Database["public"]["Enums"]["videobeam_status"]
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      public_reservations: {
+        Row: {
+          date: string | null
+          end_time: string | null
+          id: string | null
+          start_time: string | null
+          status: Database["public"]["Enums"]["reservation_status"] | null
+          user_name: string | null
+          videobeam_id: string | null
+          videobeam_name: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reservations_videobeam_id_fkey"
+            columns: ["videobeam_id"]
+            isOneToOne: false
+            referencedRelation: "videobeams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      reservation_priority: "low" | "normal" | "high"
+      reservation_status: "pending" | "approved" | "rejected" | "cancelled"
+      videobeam_status: "available" | "maintenance" | "unavailable"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +306,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      reservation_priority: ["low", "normal", "high"],
+      reservation_status: ["pending", "approved", "rejected", "cancelled"],
+      videobeam_status: ["available", "maintenance", "unavailable"],
+    },
   },
 } as const
