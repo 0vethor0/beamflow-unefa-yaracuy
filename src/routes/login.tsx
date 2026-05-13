@@ -20,8 +20,8 @@ export const Route = createFileRoute("/login")({
   validateSearch: (search) => searchSchema.parse(search),
   head: () => ({
     meta: [
-      { title: "Iniciar sesión — BeamReserve" },
-      { name: "description", content: "Accede a BeamReserve para reservar videobeams." },
+      { title: "Iniciar sesión — BeamFlow" },
+      { name: "description", content: "Accede a BeamFlow para reservar videobeams." },
     ],
   }),
   component: LoginPage,
@@ -140,7 +140,7 @@ function LoginPage() {
         {/* Header */}
         <div className="flex flex-col items-center text-center animate-in fade-in slide-in-from-top-4 duration-500">
           <Logo size={64} />
-          <h1 className="text-display-xl mt-6">BeamReserve</h1>
+          <h1 className="text-display-xl mt-6">BeamFlow</h1>
           <p className="text-text-secondary text-[15px] mt-2">
             {mode === "login" ? "Bienvenido de nuevo" : "Crea tu cuenta"}
           </p>

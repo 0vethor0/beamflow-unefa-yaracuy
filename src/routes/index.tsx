@@ -7,7 +7,7 @@ import { NeonCard } from "@/components/neon/NeonCard";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "BeamReserve — Reserva videobeams en segundos" },
+      { title: "BeamFlow — Reserva videobeams en segundos" },
       {
         name: "description",
         content:
@@ -25,7 +25,7 @@ function Landing() {
         {/* Hero */}
         <div className="mt-8 flex flex-col items-center text-center animate-in fade-in slide-in-from-top-4 duration-500">
           <Logo size={72} />
-          <h1 className="text-display-xl mt-6">BeamReserve</h1>
+          <h1 className="text-display-xl mt-6">BeamFlow</h1>
           <p className="text-text-secondary text-[15px] mt-2 max-w-xs">
             Reserva videobeams para tus clases o reuniones. Rápido, claro y sin filas.
           </p>
@@ -75,7 +75,7 @@ function Landing() {
         </div>
 
         <p className="mt-12 text-text-tertiary text-xs">
-          © {new Date().getFullYear()} BeamReserve
+          © {new Date().getFullYear()} BeamFlow
         </p>
       </div>
     </main>

@@ -30,14 +30,14 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "BeamReserve — Reserva videobeams en segundos" },
+      { title: "BeamFlow — Reserva videobeams en segundos" },
       {
         name: "description",
         content:
           "Reserva videobeams para tus clases o reuniones. Consulta el calendario de disponibilidad y agenda en segundos.",
       },
-      { name: "author", content: "BeamReserve" },
-      { property: "og:title", content: "BeamReserve — Reserva videobeams" },
+      { name: "author", content: "BeamFlow" },
+      { property: "og:title", content: "BeamFlow — Reserva videobeams" },
       {
         property: "og:description",
         content: "Sistema de reservas de videobeams rápido, claro y mobile-first.",

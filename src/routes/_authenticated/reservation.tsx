@@ -33,7 +33,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/reservation")({
   head: () => ({
     meta: [
-      { title: "Reservar — BeamReserve" },
+      { title: "Reservar — BeamFlow" },
       { name: "description", content: "Reserva un videobeam para tu próximo evento." },
     ],
   }),
