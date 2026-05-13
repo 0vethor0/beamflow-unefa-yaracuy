@@ -9,7 +9,7 @@ import { NeonCard } from "@/components/neon/NeonCard";
 export const Route = createFileRoute("/calendar")({
   head: () => ({
     meta: [
-      { title: "Calendario público — BeamReserve" },
+      { title: "Calendario público — BeamFlow" },
       { name: "description", content: "Consulta las reservas existentes de videobeams." },
     ],
   }),

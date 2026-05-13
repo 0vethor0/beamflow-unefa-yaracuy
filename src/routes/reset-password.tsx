@@ -12,7 +12,7 @@ import { NeonInput } from "@/components/neon/NeonInput";
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
-      { title: "Restablecer contraseña — BeamReserve" },
+      { title: "Restablecer contraseña — BeamFlow" },
       { name: "description", content: "Define una nueva contraseña para tu cuenta." },
     ],
   }),
