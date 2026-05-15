@@ -18,7 +18,7 @@ function WelcomePage() {
   const handleOpenApp = () => {
     // Intenta abrir la app móvil mediante deep link.
     // Si la app no está instalada, el navegador simplemente no hará nada.
-    window.location.href = "beamflow://open";
+    window.location.href = "io.supabase.flutter://callback";
   };
 
   return (
