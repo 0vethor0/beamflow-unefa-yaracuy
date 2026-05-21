@@ -10,8 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WelcomeRouteImport } from './routes/welcome'
+import { Route as WaitingApprovalRouteImport } from './routes/waiting-approval'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as CompleteProfileRouteImport } from './routes/complete-profile'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
@@ -22,6 +24,11 @@ const WelcomeRoute = WelcomeRouteImport.update({
   path: '/welcome',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WaitingApprovalRoute = WaitingApprovalRouteImport.update({
+  id: '/waiting-approval',
+  path: '/waiting-approval',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
@@ -30,6 +37,11 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompleteProfileRoute = CompleteProfileRouteImport.update({
+  id: '/complete-profile',
+  path: '/complete-profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CalendarRoute = CalendarRouteImport.update({
@@ -56,16 +68,20 @@ const AuthenticatedReservationRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
+  '/complete-profile': typeof CompleteProfileRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/waiting-approval': typeof WaitingApprovalRoute
   '/welcome': typeof WelcomeRoute
   '/reservation': typeof AuthenticatedReservationRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
+  '/complete-profile': typeof CompleteProfileRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/waiting-approval': typeof WaitingApprovalRoute
   '/welcome': typeof WelcomeRoute
   '/reservation': typeof AuthenticatedReservationRoute
 }
@@ -74,8 +90,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/calendar': typeof CalendarRoute
+  '/complete-profile': typeof CompleteProfileRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/waiting-approval': typeof WaitingApprovalRoute
   '/welcome': typeof WelcomeRoute
   '/_authenticated/reservation': typeof AuthenticatedReservationRoute
 }
@@ -84,16 +102,20 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/calendar'
+    | '/complete-profile'
     | '/login'
     | '/reset-password'
+    | '/waiting-approval'
     | '/welcome'
     | '/reservation'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/calendar'
+    | '/complete-profile'
     | '/login'
     | '/reset-password'
+    | '/waiting-approval'
     | '/welcome'
     | '/reservation'
   id:
@@ -101,8 +123,10 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/calendar'
+    | '/complete-profile'
     | '/login'
     | '/reset-password'
+    | '/waiting-approval'
     | '/welcome'
     | '/_authenticated/reservation'
   fileRoutesById: FileRoutesById
@@ -111,8 +135,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   CalendarRoute: typeof CalendarRoute
+  CompleteProfileRoute: typeof CompleteProfileRoute
   LoginRoute: typeof LoginRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  WaitingApprovalRoute: typeof WaitingApprovalRoute
   WelcomeRoute: typeof WelcomeRoute
 }
 
@@ -123,6 +149,13 @@ declare module '@tanstack/react-router' {
       path: '/welcome'
       fullPath: '/welcome'
       preLoaderRoute: typeof WelcomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/waiting-approval': {
+      id: '/waiting-approval'
+      path: '/waiting-approval'
+      fullPath: '/waiting-approval'
+      preLoaderRoute: typeof WaitingApprovalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -137,6 +170,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/complete-profile': {
+      id: '/complete-profile'
+      path: '/complete-profile'
+      fullPath: '/complete-profile'
+      preLoaderRoute: typeof CompleteProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/calendar': {
@@ -186,8 +226,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   CalendarRoute: CalendarRoute,
+  CompleteProfileRoute: CompleteProfileRoute,
   LoginRoute: LoginRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  WaitingApprovalRoute: WaitingApprovalRoute,
   WelcomeRoute: WelcomeRoute,
 }
 export const routeTree = rootRouteImport
