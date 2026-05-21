@@ -14,79 +14,151 @@ export type Database = {
   }
   public: {
     Tables: {
-      profiles: {
+      estados_producto: {
         Row: {
-          avatar_url: string | null
+          id: number
+          nombre: string
+        }
+        Insert: {
+          id: number
+          nombre: string
+        }
+        Update: {
+          id?: number
+          nombre?: string
+        }
+        Relationships: []
+      }
+      perfiles: {
+        Row: {
+          carrera: string | null
+          correo: string | null
           created_at: string
-          department: string | null
-          email: string | null
-          full_name: string | null
+          especialidad: string | null
+          foto_url: string | null
           id: string
+          primer_apellido: string | null
+          primer_nombre: string | null
+          rol: string | null
+          status: string
           updated_at: string
         }
         Insert: {
-          avatar_url?: string | null
+          carrera?: string | null
+          correo?: string | null
           created_at?: string
-          department?: string | null
-          email?: string | null
-          full_name?: string | null
+          especialidad?: string | null
+          foto_url?: string | null
           id: string
+          primer_apellido?: string | null
+          primer_nombre?: string | null
+          rol?: string | null
+          status?: string
           updated_at?: string
         }
         Update: {
-          avatar_url?: string | null
+          carrera?: string | null
+          correo?: string | null
           created_at?: string
-          department?: string | null
-          email?: string | null
-          full_name?: string | null
+          especialidad?: string | null
+          foto_url?: string | null
           id?: string
+          primer_apellido?: string | null
+          primer_nombre?: string | null
+          rol?: string | null
+          status?: string
           updated_at?: string
         }
         Relationships: []
       }
-      reservations: {
+      productos: {
         Row: {
-          created_at: string
-          date: string
-          end_time: string
+          descripcion: string | null
+          fecha_registro: string
           id: string
-          notes: string | null
-          priority: Database["public"]["Enums"]["reservation_priority"]
-          start_time: string
-          status: Database["public"]["Enums"]["reservation_status"]
-          user_id: string
-          videobeam_id: string
+          id_estado: number
+          marca: string | null
+          modelo: string | null
+          nombre: string
+          ubicacion: string | null
         }
         Insert: {
-          created_at?: string
-          date: string
-          end_time: string
+          descripcion?: string | null
+          fecha_registro?: string
           id?: string
-          notes?: string | null
-          priority?: Database["public"]["Enums"]["reservation_priority"]
-          start_time: string
-          status?: Database["public"]["Enums"]["reservation_status"]
-          user_id: string
-          videobeam_id: string
+          id_estado?: number
+          marca?: string | null
+          modelo?: string | null
+          nombre: string
+          ubicacion?: string | null
         }
         Update: {
-          created_at?: string
-          date?: string
-          end_time?: string
+          descripcion?: string | null
+          fecha_registro?: string
           id?: string
-          notes?: string | null
-          priority?: Database["public"]["Enums"]["reservation_priority"]
-          start_time?: string
-          status?: Database["public"]["Enums"]["reservation_status"]
-          user_id?: string
-          videobeam_id?: string
+          id_estado?: number
+          marca?: string | null
+          modelo?: string | null
+          nombre?: string
+          ubicacion?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "reservations_videobeam_id_fkey"
-            columns: ["videobeam_id"]
+            foreignKeyName: "productos_id_estado_fkey"
+            columns: ["id_estado"]
             isOneToOne: false
-            referencedRelation: "videobeams"
+            referencedRelation: "estados_producto"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reservas: {
+        Row: {
+          creado_en: string
+          estado_reserva: string
+          hora_fin: string
+          hora_inicio: string
+          id: string
+          id_producto: string
+          id_usuario: string
+          leido_por_admin: boolean
+          notas: string | null
+        }
+        Insert: {
+          creado_en?: string
+          estado_reserva?: string
+          hora_fin: string
+          hora_inicio: string
+          id?: string
+          id_producto: string
+          id_usuario: string
+          leido_por_admin?: boolean
+          notas?: string | null
+        }
+        Update: {
+          creado_en?: string
+          estado_reserva?: string
+          hora_fin?: string
+          hora_inicio?: string
+          id?: string
+          id_producto?: string
+          id_usuario?: string
+          leido_por_admin?: boolean
+          notas?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reservas_id_producto_fkey"
+            columns: ["id_producto"]
+            isOneToOne: false
+            referencedRelation: "productos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reservas_id_usuario_fkey"
+            columns: ["id_usuario"]
+            isOneToOne: false
+            referencedRelation: "perfiles"
             referencedColumns: ["id"]
           },
         ]
@@ -112,59 +184,9 @@ export type Database = {
         }
         Relationships: []
       }
-      videobeams: {
-        Row: {
-          brand: string | null
-          created_at: string
-          id: string
-          image_url: string | null
-          model: string | null
-          name: string
-          status: Database["public"]["Enums"]["videobeam_status"]
-        }
-        Insert: {
-          brand?: string | null
-          created_at?: string
-          id?: string
-          image_url?: string | null
-          model?: string | null
-          name: string
-          status?: Database["public"]["Enums"]["videobeam_status"]
-        }
-        Update: {
-          brand?: string | null
-          created_at?: string
-          id?: string
-          image_url?: string | null
-          model?: string | null
-          name?: string
-          status?: Database["public"]["Enums"]["videobeam_status"]
-        }
-        Relationships: []
-      }
     }
     Views: {
-      public_reservations: {
-        Row: {
-          date: string | null
-          end_time: string | null
-          id: string | null
-          start_time: string | null
-          status: Database["public"]["Enums"]["reservation_status"] | null
-          user_name: string | null
-          videobeam_id: string | null
-          videobeam_name: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "reservations_videobeam_id_fkey"
-            columns: ["videobeam_id"]
-            isOneToOne: false
-            referencedRelation: "videobeams"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
+      [_ in never]: never
     }
     Functions: {
       has_role: {
@@ -177,9 +199,6 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
-      reservation_priority: "low" | "normal" | "high"
-      reservation_status: "pending" | "approved" | "rejected" | "cancelled"
-      videobeam_status: "available" | "maintenance" | "unavailable"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -308,9 +327,6 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
-      reservation_priority: ["low", "normal", "high"],
-      reservation_status: ["pending", "approved", "rejected", "cancelled"],
-      videobeam_status: ["available", "maintenance", "unavailable"],
     },
   },
 } as const
